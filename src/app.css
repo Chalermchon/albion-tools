@@ -7,7 +7,7 @@
 		@apply font-sans text-3xl font-semibold w-full;
 	}
 
-    .link {
-        @apply text-blue-600 visited:text-purple-600 underline;
-    }
+	.link {
+		@apply text-blue-600 visited:text-purple-600 underline;
+	}
 }
