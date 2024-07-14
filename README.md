@@ -1,22 +1,18 @@
-# create-svelte
+# Albion Tools
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## Installation
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
+# adjust Node version with nvm
+nvm use
 
-# create a new project in my-app
-npm create svelte@latest my-app
+# install dependencies
+npm install
 ```
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Start a development server with:
 
 ```bash
 npm run dev
@@ -27,7 +23,7 @@ npm run dev -- --open
 
 ## Building
 
-To create a production version of your app:
+Create a production version with:
 
 ```bash
 npm run build
@@ -35,4 +31,18 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Before Commit
+
+Encourage to run format before committing with:
+
+```bash
+npm run format
+```
+
+Then, you can run commit your code with:
+
+```bash
+git commit
+```
+
+This wil run check lint and test then display prompt to commit based on [Conventional Commit](https://www.npmjs.com/package/commitizen).
