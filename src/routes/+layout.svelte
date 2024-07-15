@@ -1,11 +1,14 @@
 <!-- Typescript -->
 <script lang="ts">
 	import Navbar from 'components/navbar.svelte';
+	import PageContent from 'components/page-content.svelte';
 </script>
 
 <!-- HTML -->
 <Navbar>Albion Calculator</Navbar>
-<slot />
+<PageContent>
+	<slot />
+</PageContent>
 
 <!-- CSS -->
 <style lang="postcss">
