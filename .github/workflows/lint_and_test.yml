@@ -5,7 +5,7 @@ on:
     branches-ignore: 'main'
 
 jobs:
-  install:
+  lint_and_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,20 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-  lint:
-    needs: install
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Check Lint
         run: |
           npm run lint
 
-  test:
-    needs: lint
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Test
         run: |
           npm run test
