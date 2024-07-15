@@ -8,7 +8,7 @@ jobs:
   validate-pr-title:
     runs-on: ubuntu-latest
     steps:
-      - name: Validate PR tile
+      - name: Validate PR title
         uses: ytanikin/PRConventionalCommits@1.1.0
         with:
           add_label: 'true'
