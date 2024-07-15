@@ -1,8 +1,10 @@
 <!-- Typescript -->
 <script lang="ts">
+	import Navbar from 'components/navbar.svelte';
 </script>
 
 <!-- HTML -->
+<Navbar>Albion Calculator</Navbar>
 <slot />
 
 <!-- CSS -->
