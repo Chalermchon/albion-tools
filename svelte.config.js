@@ -13,6 +13,10 @@ const config = {
 			precompress: false,
 			strict: true
 		}),
+		alias: {
+			lib: 'src/lib',
+			components: 'src/components'
+		},
 		paths: {
 			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
 		}
