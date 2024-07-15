@@ -10,7 +10,12 @@
 		"sourceMap": true,
 		"strict": true,
 		"moduleResolution": "bundler",
-		"types": ["vitest/importMeta"]
+		"types": ["vitest/importMeta"],
+		"baseUrl": "src",
+		"paths": {
+			"$lib/*": ["src/lib"],
+			"$components/*": ["src/components"]
+		}
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	// except $lib which is handled by https://kit.svelte.dev/docs/configuration#files
