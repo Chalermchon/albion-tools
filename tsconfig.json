@@ -14,6 +14,7 @@
 		"baseUrl": "src",
 		"paths": {
 			"$lib/*": ["src/lib"],
+			"$actions/*": ["src/actions"],
 			"$components/*": ["src/components"]
 		}
 	}

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	.fixed-tr {
+		@apply fixed top-0 right-0;
+	}
+}
+
 @layer components {
 	.h1 {
 		@apply font-sans text-3xl font-semibold w-full;
@@ -17,5 +23,11 @@
 	}
 	.item {
 		@apply relative min-w-24 max-w-24 min-h-24 max-h-24 m-4 rounded-lg;
+	}
+	.drawer-animation {
+		@apply transition ease-in-out delay-150;
+	}
+	.scrollable {
+		@apply overflow-auto;
 	}
 }

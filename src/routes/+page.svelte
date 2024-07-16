@@ -1,10 +1,15 @@
 <script>
 	import AddItemButton from 'components/add-item-button.svelte';
+	import Drawer from 'components/drawer.svelte';
+
+	export let isOpen = false;
 </script>
 
-<AddItemButton />
-
-<h1 class="h1">Heading 1</h1>
-<h2 class="h2">Heading 2</h2>
-<h3 class="h3">Heading 3</h3>
-<p class="p">paragraph</p>
+<AddItemButton
+	on:click={() => {
+		isOpen = true;
+	}}
+/>
+<Drawer bind:isOpen>
+	<h1 class="h1">Item Catalog</h1>
+</Drawer>
