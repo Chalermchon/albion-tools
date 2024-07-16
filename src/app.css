@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer components {
+	.h1 {
+		@apply font-sans text-3xl font-semibold w-full;
+	}
+	.h2 {
+		@apply font-sans text-2xl leading-relaxed font-semibold w-full;
+	}
+	.h3 {
+		@apply font-sans text-xl leading-relaxed font-semibold w-full;
+	}
+	.p {
+		@apply font-sans text-base leading-relaxed tracking-wider font-semibold text-zinc-300;
+	}
 	.item {
 		@apply relative min-w-24 max-w-24 min-h-24 max-h-24 m-4 rounded-lg;
 	}
