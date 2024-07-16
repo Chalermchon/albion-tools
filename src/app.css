@@ -3,11 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-	.h1 {
-		@apply font-sans text-3xl font-semibold w-full;
-	}
-
-	.link {
-		@apply text-blue-600 visited:text-purple-600 underline;
+	.item {
+		@apply relative min-w-24 max-w-24 min-h-24 max-h-24 m-4 rounded-lg;
 	}
 }
