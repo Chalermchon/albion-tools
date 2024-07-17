@@ -1,13 +1,15 @@
 <script>
-	import AddItemButton from 'components/atoms/add-item-button.svelte';
+	import { inventory } from 'store/inventory';
+	import Inventory from 'components/organisms/inventory.svelte';
 	import ItemCatalog from 'components/organisms/item-catalog.svelte';
 
 	let isOpenItemCatalog = false;
 </script>
 
-<AddItemButton
-	on:click={() => {
+<ItemCatalog bind:isOpen={isOpenItemCatalog} />
+<Inventory
+	items={$inventory}
+	on:clickAddItemButton={() => {
 		isOpenItemCatalog = true;
 	}}
 />
-<ItemCatalog bind:isOpen={isOpenItemCatalog} />
