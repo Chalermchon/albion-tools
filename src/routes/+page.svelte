@@ -1,16 +1,13 @@
 <script>
-	import AddItemButton from 'components/add-item-button.svelte';
-	import Drawer from 'components/drawer.svelte';
-	import ItemCatalogSection from 'components/item-catalog-section.svelte';
+	import AddItemButton from 'components/atoms/add-item-button.svelte';
+	import ItemCatalog from 'components/organisms/item-catalog.svelte';
 
-	export let isOpen = false;
+	let isOpenItemCatalog = false;
 </script>
 
 <AddItemButton
 	on:click={() => {
-		isOpen = true;
+		isOpenItemCatalog = true;
 	}}
 />
-<Drawer bind:isOpen>
-	<ItemCatalogSection />
-</Drawer>
+<ItemCatalog bind:isOpen={isOpenItemCatalog} />
