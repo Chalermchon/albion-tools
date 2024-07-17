@@ -6,4 +6,5 @@ export interface IItemCategoryRepository {
 
 export interface IItemRepository {
 	findAll(): IItem[];
+	findById(id: string): IItem | null;
 }

@@ -8,5 +8,12 @@ class ItemRepository implements IItemRepository {
 			return new Item({ id, ...item });
 		});
 	}
+	findById(id: string): Item | null {
+		const item = ItemData[id];
+		if (!item) {
+			return null;
+		}
+		return new Item({ id, ...item });
+	}
 }
 export default new ItemRepository();

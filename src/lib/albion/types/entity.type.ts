@@ -15,6 +15,15 @@ export interface IItem {
 	tier: number;
 	name: string;
 	imageUrl: string;
+
+	toObject(): {
+		id: string;
+		category: ItemCategory;
+		type: ItemType;
+		tier: number;
+		name: string;
+		imageUrl: string;
+	};
 }
 export enum ItemCategory {
 	Resource = 'resource',
