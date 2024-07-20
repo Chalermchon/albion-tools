@@ -1,11 +1,16 @@
-import ItemCategoryRepository from '../repositories/item-category.repository';
-import ItemRepository from '../repositories/item.repository';
+import { initialItemCategoryRepository } from '../repositories/item-category.repository';
+import { initialItemRepository } from '../repositories/item.repository';
 import type { IItemCatalogService, ItemsGroupedByCategoryAndType } from '../types/service.type';
 
-class ItemCatalogService implements IItemCatalogService {
+export class ItemCatalogService implements IItemCatalogService {
+	constructor(
+		private itemCategoryRepository = initialItemCategoryRepository(),
+		private itemRepository = initialItemRepository()
+	) {}
+
 	getItemsByGroupingWithCategoryAndType(): ItemsGroupedByCategoryAndType {
-		const categories = ItemCategoryRepository.findAll();
-		const items = ItemRepository.findAll();
+		const categories = this.itemCategoryRepository.findAll();
+		const items = this.itemRepository.findAll();
 
 		return categories.map((category) => ({
 			...category.toObject(),
@@ -19,4 +24,6 @@ class ItemCatalogService implements IItemCatalogService {
 		}));
 	}
 }
-export default new ItemCatalogService();
+export function initialItemCatalogService(): IItemCatalogService {
+	return new ItemCatalogService();
+}

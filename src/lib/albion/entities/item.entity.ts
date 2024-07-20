@@ -64,7 +64,7 @@ export class Item implements IItem {
 		return this._name;
 	}
 	public get imageUrl(): string {
-		return `https://render.albiononline.com/v1/item/${this._name}.png`;
+		return new URL(`https://render.albiononline.com/v1/item/${this._name}.png`).toString();
 	}
 
 	public toObject() {

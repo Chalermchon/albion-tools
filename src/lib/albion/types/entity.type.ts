@@ -2,6 +2,12 @@ export interface IItemCategory {
 	id: string;
 	name: string;
 	types: IItemType[];
+
+	toObject(): {
+		id: string;
+		name: string;
+		types: IItemType[];
+	};
 }
 export interface IItemType {
 	id: string;
@@ -15,6 +21,15 @@ export interface IItem {
 	tier: number;
 	name: string;
 	imageUrl: string;
+
+	toObject(): {
+		id: string;
+		category: ItemCategory;
+		type: ItemType;
+		tier: number;
+		name: string;
+		imageUrl: string;
+	};
 }
 export enum ItemCategory {
 	Resource = 'resource',

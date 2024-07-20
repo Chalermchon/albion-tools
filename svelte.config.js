@@ -16,7 +16,8 @@ const config = {
 		alias: {
 			lib: 'src/lib',
 			actions: 'src/actions',
-			components: 'src/components'
+			components: 'src/components',
+			store: 'src/store'
 		},
 		paths: {
 			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
