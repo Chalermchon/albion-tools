@@ -3,12 +3,15 @@
 	import Drawer from 'components/molecules/drawer.svelte';
 	import { initialItemCatalogService } from 'lib/albion/services/item-catalog.service';
 	import type { ItemWithQuantity } from 'lib/albion/types/service.type';
-	import { addItemIntoInventory } from 'store/inventory';
+	import { createEventDispatcher } from 'svelte';
 
 	const ItemCatalogService = initialItemCatalogService();
 
 	export let isOpen = false;
 	export let items: ItemWithQuantity[] = [];
+	const dispatch = createEventDispatcher<{
+		clickItem: { itemId: string };
+	}>();
 
 	const categories = ItemCatalogService.getItemsByGroupingWithCategoryAndType();
 </script>
@@ -26,7 +29,7 @@
 						<Item
 							imageUrl={item.imageUrl}
 							name={item.name}
-							on:click={() => addItemIntoInventory(item.id)}
+							on:click={() => dispatch('clickItem', { itemId: item.id })}
 							quantity={itemQuantity}
 							faded={!itemQuantity}
 						/>

@@ -6,6 +6,12 @@
 	.fixed-tr {
 		@apply fixed top-0 right-0;
 	}
+	.absolute-center {
+		@apply absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2;
+	}
+	.flex-center-center {
+		@apply flex items-center justify-center;
+	}
 }
 
 @layer components {
