@@ -1,9 +1,11 @@
-import type { Item } from '../entities/item.entity';
-import ItemRepository from '../repositories/item.repository';
+import { initialItemRepository } from '../repositories/item.repository';
+import type { IItem } from '../types/entity.type';
 import type { IInventoryService, ItemWithQuantity } from '../types/service.type';
 
-class InventoryService implements IInventoryService {
-	private items: Map<string, { item: Item; quantity: number }> = new Map();
+export class InventoryService implements IInventoryService {
+	constructor(private itemRepository = initialItemRepository()) {}
+
+	private items: Map<string, { item: IItem; quantity: number }> = new Map();
 
 	getItems(): ItemWithQuantity[] {
 		return Array.from(this.items.values()).map(({ item, quantity }) => ({
@@ -16,9 +18,9 @@ class InventoryService implements IInventoryService {
 		if (existingItem) {
 			existingItem.quantity += quantity;
 		} else {
-			const item = ItemRepository.findById(itemId);
+			const item = this.itemRepository.findById(itemId);
 			if (item) {
-				this.items.set(itemId, { item, quantity });
+				this.items.set(itemId, { item: item, quantity });
 			}
 		}
 	}
@@ -33,4 +35,6 @@ class InventoryService implements IInventoryService {
 		}
 	}
 }
-export default new InventoryService();
+export function initialInventoryService(): IInventoryService {
+	return new InventoryService();
+}
