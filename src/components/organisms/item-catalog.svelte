@@ -21,12 +21,14 @@
 			<p class="p">- {type.name}</p>
 			<div class="flex flex-row flex-wrap mb-2">
 				{#each type.items as item}
+					{@const itemQuantity = items.find(({ id }) => id === item.id)?.quantity}
 					<Item
 						imageUrl={item.imageUrl}
 						name={item.name}
 						on:click={() => addItemIntoInventory(item.id)}
-						quantity={items.find(({ id }) => id === item.id)?.quantity}
-					/>
+						quantity={itemQuantity}
+						disable={!itemQuantity}
+					></Item>
 				{/each}
 			</div>
 		{/each}
