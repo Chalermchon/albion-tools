@@ -19,7 +19,6 @@
 	}
 </script>
 
-<ItemCatalog bind:isOpen={isOpenItemCatalog} bind:items={itemsInItemCatalog} />
 <Inventory
 	items={$inventory}
 	on:clickAddItemButton={() => {
@@ -29,3 +28,4 @@
 		});
 	}}
 />
+<ItemCatalog bind:isOpen={isOpenItemCatalog} bind:items={itemsInItemCatalog} />
