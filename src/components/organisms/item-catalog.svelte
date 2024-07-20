@@ -28,7 +28,7 @@
 							name={item.name}
 							on:click={() => addItemIntoInventory(item.id)}
 							quantity={itemQuantity}
-							disable={!itemQuantity}
+							faded={!itemQuantity}
 						/>
 					</div>
 				{/each}
