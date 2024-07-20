@@ -5,18 +5,22 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let items: ItemWithQuantity[] = [];
-
-	const dispatch = createEventDispatcher();
-
-	const handleClickAddButton = () => {
-		dispatch('clickAddItemButton');
-	};
+	const dispatch = createEventDispatcher<{
+		clickAddItemButton: null;
+		clickItem: { itemId: string };
+	}>();
 </script>
 
 <h1 class="h1 mb-4">Inventory</h1>
 <div class="flex flex-row flex-wrap">
 	{#each items as item}
-		<Item imageUrl={item.imageUrl} name={item.name} quantity={item.quantity} />
+		<Item
+			removable
+			imageUrl={item.imageUrl}
+			name={item.name}
+			quantity={item.quantity}
+			on:click={() => dispatch('clickItem', { itemId: item.id })}
+		/>
 	{/each}
-	<AddItemButton on:click={handleClickAddButton} />
+	<AddItemButton on:click={() => dispatch('clickAddItemButton')} />
 </div>

@@ -3,7 +3,7 @@
 	import ItemCatalog from 'components/organisms/item-catalog.svelte';
 	import type { ItemWithQuantity } from 'lib/albion/types/service.type';
 	import { delay } from 'lib/utils/delay';
-	import { inventory } from 'store/inventory';
+	import { addItemIntoInventory, inventory, removeItemFromInventory } from 'store/inventory';
 
 	let itemsInItemCatalog: ItemWithQuantity[] = [];
 	let isOpenItemCatalog = false;
@@ -19,7 +19,6 @@
 	}
 </script>
 
-<ItemCatalog bind:isOpen={isOpenItemCatalog} bind:items={itemsInItemCatalog} />
 <Inventory
 	items={$inventory}
 	on:clickAddItemButton={() => {
@@ -28,4 +27,10 @@
 			itemsInItemCatalog = items;
 		});
 	}}
+	on:clickItem={(e) => removeItemFromInventory(e.detail.itemId)}
+/>
+<ItemCatalog
+	bind:isOpen={isOpenItemCatalog}
+	bind:items={itemsInItemCatalog}
+	on:clickItem={(e) => addItemIntoInventory(e.detail.itemId)}
 />
