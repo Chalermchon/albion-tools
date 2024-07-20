@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import type { ItemWithQuantity } from 'lib/albion/types/service.type';
 	import AddItemButton from 'components/atoms/add-item-button.svelte';
 	import Item from 'components/atoms/item.svelte';
+	import type { ItemWithQuantity } from 'lib/albion/types/service.type';
+	import { createEventDispatcher } from 'svelte';
 
 	export let items: ItemWithQuantity[] = [];
 

@@ -1,12 +1,14 @@
 <script lang="ts">
-	import ItemCatalogService from 'lib/albion/services/item-catalog.service';
 	import Item from 'components/atoms/item.svelte';
 	import Drawer from 'components/molecules/drawer.svelte';
+	import ItemCatalogService from 'lib/albion/services/item-catalog.service';
+	import type { ItemWithQuantity } from 'lib/albion/types/service.type';
 	import { addItemIntoInventory } from 'store/inventory';
 
 	export let isOpen = false;
+	export let items: ItemWithQuantity[] = [];
 
-	export const categories = ItemCatalogService.getItemsByGroupingWithCategoryAndType();
+	const categories = ItemCatalogService.getItemsByGroupingWithCategoryAndType();
 </script>
 
 <Drawer bind:isOpen>
@@ -21,6 +23,7 @@
 						imageUrl={item.imageUrl}
 						name={item.name}
 						on:click={() => addItemIntoInventory(item.id)}
+						quantity={items.find(({ id }) => id === item.id)?.quantity}
 					/>
 				{/each}
 			</div>
