@@ -1,8 +1,8 @@
 import InventoryService from 'lib/albion/services/inventory.service';
-import type { ItemsInInventory } from 'lib/albion/types/service.type';
+import type { ItemWithQuantity } from 'lib/albion/types/service.type';
 import { writable } from 'svelte/store';
 
-export const inventory = writable<ItemsInInventory>([]);
+export const inventory = writable<ItemWithQuantity[]>([]);
 
 export function addItemIntoInventory(itemId: string, quantity = 1) {
 	InventoryService.addItem(itemId, quantity);

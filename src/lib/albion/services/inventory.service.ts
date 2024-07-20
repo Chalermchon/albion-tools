@@ -1,11 +1,11 @@
 import type { Item } from '../entities/item.entity';
 import ItemRepository from '../repositories/item.repository';
-import type { IInventoryService, ItemsInInventory } from '../types/service.type';
+import type { IInventoryService, ItemWithQuantity } from '../types/service.type';
 
 class InventoryService implements IInventoryService {
 	private items: Map<string, { item: Item; quantity: number }> = new Map();
 
-	getItems(): ItemsInInventory {
+	getItems(): ItemWithQuantity[] {
 		return Array.from(this.items.values()).map(({ item, quantity }) => ({
 			...item.toObject(),
 			quantity

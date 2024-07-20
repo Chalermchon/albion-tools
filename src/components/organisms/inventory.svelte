@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import type { ItemsInInventory } from 'lib/albion/types/service.type';
+	import type { ItemWithQuantity } from 'lib/albion/types/service.type';
 	import AddItemButton from 'components/atoms/add-item-button.svelte';
 	import Item from 'components/atoms/item.svelte';
 
-	export let items: ItemsInInventory = [];
+	export let items: ItemWithQuantity[] = [];
 
 	const dispatch = createEventDispatcher();
 
