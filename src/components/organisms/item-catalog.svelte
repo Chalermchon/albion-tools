@@ -22,13 +22,15 @@
 			<div class="flex flex-row flex-wrap mb-2">
 				{#each type.items as item}
 					{@const itemQuantity = items.find(({ id }) => id === item.id)?.quantity}
-					<Item
-						imageUrl={item.imageUrl}
-						name={item.name}
-						on:click={() => addItemIntoInventory(item.id)}
-						quantity={itemQuantity}
-						disable={!itemQuantity}
-					></Item>
+					<div class="hover:-translate-y-2 active:translate-y-1">
+						<Item
+							imageUrl={item.imageUrl}
+							name={item.name}
+							on:click={() => addItemIntoInventory(item.id)}
+							quantity={itemQuantity}
+							disable={!itemQuantity}
+						/>
+					</div>
 				{/each}
 			</div>
 		{/each}
