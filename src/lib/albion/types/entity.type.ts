@@ -2,6 +2,12 @@ export interface IItemCategory {
 	id: string;
 	name: string;
 	types: IItemType[];
+
+	toObject(): {
+		id: string;
+		name: string;
+		types: IItemType[];
+	};
 }
 export interface IItemType {
 	id: string;
