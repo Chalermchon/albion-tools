@@ -6,6 +6,12 @@ export interface IInventoryService {
 	addItem(itemId: string, quantity?: number): void;
 	removeItem(itemId: string, quantity?: number): void;
 }
+export interface ICraftingService {
+	getItems(): ItemWithQuantity[];
+	addItem(itemId: string, quantity?: number): void;
+	removeItem(itemId: string, quantity?: number): void;
+	getRequiredItems(existingItems?: Record<string, number>): ItemWithQuantity[];
+}
 
 export type ItemsGroupedByCategoryAndType = Array<{
 	id: string;

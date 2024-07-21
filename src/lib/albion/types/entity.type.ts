@@ -30,6 +30,7 @@ export interface IItem {
 		name: string;
 		imageUrl: string;
 	};
+	getRequiredItems(): Record<string, number> | null;
 }
 export enum ItemCategory {
 	Resource = 'resource',

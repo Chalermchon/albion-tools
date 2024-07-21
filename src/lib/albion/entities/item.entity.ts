@@ -12,6 +12,7 @@ type ItemArgument = {
 	type: string;
 	tier: number;
 	name: string;
+	requiredItems?: Record<string, number> | null;
 };
 export class Item implements IItem {
 	private _id!: string;
@@ -19,8 +20,9 @@ export class Item implements IItem {
 	private _type!: ItemType;
 	private _tier!: number;
 	private _name!: string;
+	private _requiredItems!: Record<string, number> | null;
 
-	constructor({ id, category, type, tier, name }: ItemArgument) {
+	constructor({ id, category, type, tier, name, requiredItems }: ItemArgument) {
 		if (!this.isValidCategory(category)) {
 			throw new Error(`${category} is an invalid category`);
 		}
@@ -32,6 +34,7 @@ export class Item implements IItem {
 		this._type = type;
 		this._tier = tier;
 		this._name = name;
+		this._requiredItems = requiredItems ?? null;
 	}
 
 	private isValidCategory(category: string): category is ItemCategory {
@@ -76,5 +79,9 @@ export class Item implements IItem {
 			name: this.name,
 			imageUrl: this.imageUrl
 		};
+	}
+
+	getRequiredItems() {
+		return this._requiredItems;
 	}
 }

@@ -99,10 +99,19 @@ describe('InventoryService', () => {
 			expect(items).toContainEqual({ ...mockItem, quantity: 6 });
 		});
 
-		it('should remove the item if the quantity to remove is greater than or equal to the quantity in inventory', () => {
+		it('should remove the item if the quantity to remove is equal to the quantity in inventory', () => {
 			inventoryService.addItem('1', 10);
 
 			inventoryService.removeItem('1', 10);
+
+			const items = inventoryService.getItems();
+			expect(items).toEqual([]);
+		});
+
+		it('should remove the item if the quantity to remove is greater than the quantity in inventory', () => {
+			inventoryService.addItem('1', 10);
+
+			inventoryService.removeItem('1', 12);
 
 			const items = inventoryService.getItems();
 			expect(items).toEqual([]);

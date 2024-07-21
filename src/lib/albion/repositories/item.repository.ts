@@ -13,7 +13,11 @@ export class ItemRepository implements IItemRepository {
 		if (!item) {
 			return null;
 		}
-		return new Item({ id, ...item });
+		return new Item({
+			id,
+			...item,
+			requiredItems: item.craftingOptions?.[0]
+		});
 	}
 }
 export function initialItemRepository(): IItemRepository {

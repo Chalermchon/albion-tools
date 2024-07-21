@@ -4,23 +4,31 @@
 	import type { ItemWithQuantity } from 'lib/albion/types/service.type';
 	import { createEventDispatcher } from 'svelte';
 
+	export let title: string;
 	export let items: ItemWithQuantity[] = [];
+	export let readonly: boolean = false;
 	const dispatch = createEventDispatcher<{
 		clickAddItemButton: null;
 		clickItem: { itemId: string };
 	}>();
 </script>
 
-<h1 class="h1 mb-4">Inventory</h1>
-<div class="flex flex-row flex-wrap">
+<h1 class="h1 mb-4">{title}</h1>
+<div class="flex flex-row flex-wrap mb-8">
 	{#each items as item}
 		<Item
-			removable
+			removable={!readonly}
 			imageUrl={item.imageUrl}
 			name={item.name}
 			quantity={item.quantity}
-			on:click={() => dispatch('clickItem', { itemId: item.id })}
+			on:click={() => {
+				if (!readonly) {
+					dispatch('clickItem', { itemId: item.id });
+				}
+			}}
 		/>
 	{/each}
-	<AddItemButton on:click={() => dispatch('clickAddItemButton')} />
+	{#if !readonly}
+		<AddItemButton on:click={() => dispatch('clickAddItemButton')} />
+	{/if}
 </div>

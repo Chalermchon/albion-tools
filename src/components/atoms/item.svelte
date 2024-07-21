@@ -23,6 +23,10 @@
 			<Icon name="minus" class="w-6 h-6" />
 		</button>
 	{/if}
-	<img class={`w-24 h-24 scale-125 ${faded && 'opacity-60'}`} alt="{name} Icon" src={imageUrl} />
+	<img
+		class={`w-24 h-24 scale-125 pointer-events-none ${faded && 'opacity-60'}`}
+		alt="{name} Icon"
+		src={imageUrl}
+	/>
 	<div class="absolute w-7 right-1 bottom-2 text-center font-mono">{quantity ?? ''}</div>
 </button>
