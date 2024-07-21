@@ -65,3 +65,6 @@ export class CraftingService implements ICraftingService {
 		return Array.from(allRequiredItems.values());
 	}
 }
+export function initialCraftingService() {
+	return new CraftingService();
+}
