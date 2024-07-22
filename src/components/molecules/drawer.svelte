@@ -22,7 +22,7 @@
 	/>
 	<div
 		bind:this={drawerElement}
-		class={`fixed-tr h-screen w-3/4 z-50 bg-oslo-gray-950 shadow-slate-50 drawer-animation ${isOpen ? 'translate-x-0' : 'translate-x-full'} p-8 scrollable`}
+		class={`fixed-tr h-screen w-3/4 z-30 bg-oslo-gray-950 shadow-slate-50 drawer-animation ${isOpen ? 'translate-x-0' : 'translate-x-full'} p-8 scrollable`}
 		use:clickOutside
 		on:clickOutside={close}
 	>
