@@ -3,13 +3,13 @@ export interface IItemCatalogService {
 }
 export interface IInventoryService {
 	getItems(): ItemWithQuantity[];
-	addItem(itemId: string, quantity?: number): void;
-	removeItem(itemId: string, quantity?: number): void;
+	upsertItemQuantity(itemId: string, quantity: number): void;
+	removeItem(itemId: string): void;
 }
 export interface ICraftingService {
 	getItems(): ItemWithQuantity[];
-	addItem(itemId: string, quantity?: number): void;
-	removeItem(itemId: string, quantity?: number): void;
+	upsertItemQuantity(itemId: string, quantity: number): void;
+	removeItem(itemId: string): void;
 	getRequiredItems(existingItems?: Record<string, number>): ItemWithQuantity[];
 }
 

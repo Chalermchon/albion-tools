@@ -58,31 +58,46 @@ describe('InventoryService', () => {
 		});
 
 		it('should return items with their quantities when items are added', () => {
-			inventoryService.addItem('1', 10);
+			inventoryService.upsertItemQuantity('1', 10);
 
 			const items = inventoryService.getItems();
 			expect(items).toEqual([{ ...mockItem, quantity: 10 }]);
 		});
 	});
 
-	describe('addItem', () => {
+	describe('upsertItemQuantity', () => {
 		it('should add a new item if it does not exist', () => {
-			inventoryService.addItem('1', 5);
+			inventoryService.upsertItemQuantity('1', 5);
 
 			const items = inventoryService.getItems();
 			expect(items).toContainEqual({ ...mockItem, quantity: 5 });
 		});
 
-		it('should increase the quantity of an existing item', () => {
-			inventoryService.addItem('1', 5);
-			inventoryService.addItem('1', 3);
+		it('should remove the item if quantity is zero', () => {
+			inventoryService.upsertItemQuantity('1', 4);
+			inventoryService.upsertItemQuantity('1', 0);
 
 			const items = inventoryService.getItems();
-			expect(items).toContainEqual({ ...mockItem, quantity: 8 });
+			expect(items).toEqual([]);
+		});
+
+		it('should replace the quantity of an existing item', () => {
+			inventoryService.upsertItemQuantity('1', 5);
+			inventoryService.upsertItemQuantity('1', 3);
+
+			const items = inventoryService.getItems();
+			expect(items).toContainEqual({ ...mockItem, quantity: 3 });
 		});
 
 		it('should not add an item if the item is not found in the repository', () => {
-			inventoryService.addItem('non-existent-id');
+			inventoryService.upsertItemQuantity('non-existent-id', 4);
+
+			const items = inventoryService.getItems();
+			expect(items).toEqual([]);
+		});
+
+		it('should not add an item if the quantity is a negative number', () => {
+			inventoryService.upsertItemQuantity('1', -4);
 
 			const items = inventoryService.getItems();
 			expect(items).toEqual([]);
@@ -90,38 +105,22 @@ describe('InventoryService', () => {
 	});
 
 	describe('removeItem', () => {
-		it('should decrease the quantity of an existing item', () => {
-			inventoryService.addItem('1', 10);
+		it('should remove the existing item from inventory', () => {
+			inventoryService.upsertItemQuantity('1', 10);
 
-			inventoryService.removeItem('1', 4);
-
-			const items = inventoryService.getItems();
-			expect(items).toContainEqual({ ...mockItem, quantity: 6 });
-		});
-
-		it('should remove the item if the quantity to remove is equal to the quantity in inventory', () => {
-			inventoryService.addItem('1', 10);
-
-			inventoryService.removeItem('1', 10);
-
-			const items = inventoryService.getItems();
-			expect(items).toEqual([]);
-		});
-
-		it('should remove the item if the quantity to remove is greater than the quantity in inventory', () => {
-			inventoryService.addItem('1', 10);
-
-			inventoryService.removeItem('1', 12);
+			inventoryService.removeItem('1');
 
 			const items = inventoryService.getItems();
 			expect(items).toEqual([]);
 		});
 
 		it('should not affect the inventory if the item does not exist', () => {
-			inventoryService.removeItem('non-existent-id', 5);
+			inventoryService.upsertItemQuantity('1', 10);
+
+			inventoryService.removeItem('non-existent-id');
 
 			const items = inventoryService.getItems();
-			expect(items).toEqual([]);
+			expect(items).toEqual([{ ...mockItem, quantity: 10 }]);
 		});
 	});
 });

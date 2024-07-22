@@ -13,26 +13,23 @@ export class InventoryService implements IInventoryService {
 			quantity
 		}));
 	}
-	addItem(itemId: string, quantity = 1): void {
-		const existingItem = this.items.get(itemId);
-		if (existingItem) {
-			existingItem.quantity += quantity;
+	upsertItemQuantity(itemId: string, quantity: number): void {
+		if (quantity <= 0) {
+			this.items.delete(itemId);
 		} else {
-			const item = this.itemRepository.findById(itemId);
-			if (item) {
-				this.items.set(itemId, { item: item, quantity });
+			const existingItem = this.items.get(itemId);
+			if (existingItem) {
+				existingItem.quantity = quantity;
+			} else {
+				const item = this.itemRepository.findById(itemId);
+				if (item) {
+					this.items.set(itemId, { item: item, quantity });
+				}
 			}
 		}
 	}
-	removeItem(itemId: string, quantity = 1): void {
-		const existingItem = this.items.get(itemId);
-		if (existingItem) {
-			if (existingItem.quantity <= quantity) {
-				this.items.delete(itemId);
-			} else {
-				existingItem.quantity -= quantity;
-			}
-		}
+	removeItem(itemId: string): void {
+		this.items.delete(itemId);
 	}
 }
 export function initialInventoryService(): IInventoryService {

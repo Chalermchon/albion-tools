@@ -108,7 +108,7 @@ describe('CraftingService', () => {
 		});
 
 		it('should return items with their quantities when items are added', () => {
-			craftingService.addItem('1', 10);
+			craftingService.upsertItemQuantity('1', 10);
 
 			const items = craftingService.getItems();
 
@@ -126,9 +126,9 @@ describe('CraftingService', () => {
 		});
 	});
 
-	describe('addItem', () => {
+	describe('upsertItemQuantity', () => {
 		it('should add a new item if it does not exist', () => {
-			craftingService.addItem('1', 5);
+			craftingService.upsertItemQuantity('1', 5);
 
 			const items = craftingService.getItems();
 
@@ -143,9 +143,9 @@ describe('CraftingService', () => {
 			});
 		});
 
-		it('should increase the quantity of an existing item', () => {
-			craftingService.addItem('1', 5);
-			craftingService.addItem('1', 3);
+		it('should replace the quantity of an existing item', () => {
+			craftingService.upsertItemQuantity('1', 5);
+			craftingService.upsertItemQuantity('1', 3);
 
 			const items = craftingService.getItems();
 
@@ -156,12 +156,27 @@ describe('CraftingService', () => {
 				tier: mockItems[0].tier,
 				name: mockItems[0].name,
 				imageUrl: mockItems[0].imageUrl,
-				quantity: 8
+				quantity: 3
 			});
 		});
 
+		it('should remove the item if quantity is zero', () => {
+			craftingService.upsertItemQuantity('1', 4);
+			craftingService.upsertItemQuantity('1', 0);
+
+			const items = craftingService.getItems();
+			expect(items).toEqual([]);
+		});
+
 		it('should not add an item if the item is not found in the repository', () => {
-			craftingService.addItem('non-existent-id');
+			craftingService.upsertItemQuantity('non-existent-id', 4);
+
+			const items = craftingService.getItems();
+			expect(items).toEqual([]);
+		});
+
+		it('should not add an item if the quantity is a negative number', () => {
+			craftingService.upsertItemQuantity('1', -4);
 
 			const items = craftingService.getItems();
 			expect(items).toEqual([]);
@@ -169,46 +184,32 @@ describe('CraftingService', () => {
 	});
 
 	describe('removeItem', () => {
-		it('should decrease the quantity of an existing item', () => {
-			craftingService.addItem('1', 10);
+		it('should remove the existing item from inventory', () => {
+			craftingService.upsertItemQuantity('1', 10);
 
-			craftingService.removeItem('1', 4);
-
-			const items = craftingService.getItems();
-			expect(items).toContainEqual({
-				id: mockItems[0].id,
-				category: mockItems[0].category,
-				type: mockItems[0].type,
-				tier: mockItems[0].tier,
-				name: mockItems[0].name,
-				imageUrl: mockItems[0].imageUrl,
-				quantity: 6
-			});
-		});
-
-		it('should remove the item if the quantity to remove is greater than or equal to the quantity in inventory', () => {
-			craftingService.addItem('1', 10);
-
-			craftingService.removeItem('1', 10);
-
-			const items = craftingService.getItems();
-			expect(items).toEqual([]);
-		});
-
-		it('should remove the item if the quantity to remove is greater than or equal to the quantity in inventory', () => {
-			craftingService.addItem('1', 10);
-
-			craftingService.removeItem('1', 10);
+			craftingService.removeItem('1');
 
 			const items = craftingService.getItems();
 			expect(items).toEqual([]);
 		});
 
 		it('should not affect the inventory if the item does not exist', () => {
-			craftingService.removeItem('non-existent-id', 5);
+			craftingService.upsertItemQuantity('1', 10);
+
+			craftingService.removeItem('non-existent-id');
 
 			const items = craftingService.getItems();
-			expect(items).toEqual([]);
+			expect(items).toEqual([
+				{
+					id: mockItems[0].id,
+					category: mockItems[0].category,
+					type: mockItems[0].type,
+					tier: mockItems[0].tier,
+					name: mockItems[0].name,
+					imageUrl: mockItems[0].imageUrl,
+					quantity: 10
+				}
+			]);
 		});
 	});
 
@@ -219,7 +220,7 @@ describe('CraftingService', () => {
 		});
 
 		it('should return all required items for crafting based on existing items', () => {
-			craftingService.addItem('1', 3);
+			craftingService.upsertItemQuantity('1', 3);
 
 			const existingItems = {
 				'2': 2,
@@ -251,7 +252,7 @@ describe('CraftingService', () => {
 		});
 
 		it('should return all items with their original quantities if no existing items are provided', () => {
-			craftingService.addItem('1', 2);
+			craftingService.upsertItemQuantity('1', 2);
 
 			const result = craftingService.getRequiredItems();
 
