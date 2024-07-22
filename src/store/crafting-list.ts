@@ -1,9 +1,7 @@
-import { initialCraftingService } from 'lib/albion/services/crafting.service';
+import { CraftingService } from 'lib/services';
 import type { ItemWithQuantity } from 'lib/albion/types/service.type';
 import { derived, writable, type Writable } from 'svelte/store';
 import { inventory } from './inventory';
-
-const CraftingService = initialCraftingService();
 
 export const craftingItems = writable<ItemWithQuantity[]>([]);
 export const requiredItems = derived<
