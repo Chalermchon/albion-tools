@@ -12,6 +12,12 @@
 	.flex-center-center {
 		@apply flex items-center justify-center;
 	}
+
+	input[type='number']::-webkit-inner-spin-button,
+	input[type='number']::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
 }
 
 @layer components {

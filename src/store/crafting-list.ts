@@ -20,11 +20,7 @@ export const requiredItems = derived<
 	[]
 );
 
-export function addItemIntoCraftingList(itemId: string, quantity = 1) {
-	CraftingService.addItem(itemId, quantity);
-	craftingItems.update(() => CraftingService.getItems());
-}
-export function removeItemFromCraftingList(itemId: string, quantity = 1) {
-	CraftingService.removeItem(itemId, quantity);
+export function updateItemIntoCraftingList(itemId: string, quantity: number) {
+	CraftingService.upsertItemQuantity(itemId, quantity);
 	craftingItems.update(() => CraftingService.getItems());
 }

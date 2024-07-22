@@ -10,7 +10,7 @@
 	export let isOpen = false;
 	export let items: ItemWithQuantity[] = [];
 	const dispatch = createEventDispatcher<{
-		clickItem: { itemId: string };
+		clickItem: { item: ItemWithQuantity };
 	}>();
 
 	const categories = ItemCatalogService.getItemsByGroupingWithCategoryAndType();
@@ -29,9 +29,17 @@
 						<Item
 							imageUrl={item.imageUrl}
 							name={item.name}
-							on:click={() => dispatch('clickItem', { itemId: item.id })}
+							on:click={() => {
+								dispatch('clickItem', {
+									item: {
+										...item,
+										quantity: itemQuantity ?? 0
+									}
+								});
+							}}
 							quantity={itemQuantity}
 							faded={!itemQuantity}
+							editable={false}
 						/>
 					</div>
 				{/each}

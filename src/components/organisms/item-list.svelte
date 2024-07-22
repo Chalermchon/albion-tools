@@ -17,7 +17,7 @@
 <div class="flex flex-row flex-wrap mb-8">
 	{#each items as item}
 		<Item
-			removable={!readonly}
+			{readonly}
 			imageUrl={item.imageUrl}
 			name={item.name}
 			quantity={item.quantity}
