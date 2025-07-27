@@ -1,9 +1,9 @@
-import { initialItemRepository } from '../repositories/item.repository';
 import type { IItem } from '../types/entity.type';
+import type { IItemRepository } from '../types/repository.type';
 import type { ICraftingService, ItemWithQuantity } from '../types/service.type';
 
 export class CraftingService implements ICraftingService {
-	constructor(private itemRepository = initialItemRepository()) {}
+	constructor(private itemRepository: IItemRepository) {}
 
 	private items: Map<string, { item: IItem; quantity: number }> = new Map();
 
@@ -62,6 +62,6 @@ export class CraftingService implements ICraftingService {
 		return Array.from(allRequiredItems.values());
 	}
 }
-export function initialCraftingService() {
-	return new CraftingService();
+export function initialCraftingService(itemRepository: IItemRepository) {
+	return new CraftingService(itemRepository);
 }

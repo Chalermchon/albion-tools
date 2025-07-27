@@ -1,9 +1,9 @@
-import { initialItemRepository } from '../repositories/item.repository';
 import type { IItem } from '../types/entity.type';
+import type { IItemRepository } from '../types/repository.type';
 import type { IInventoryService, ItemWithQuantity } from '../types/service.type';
 
 export class InventoryService implements IInventoryService {
-	constructor(private itemRepository = initialItemRepository()) {}
+	constructor(private itemRepository: IItemRepository) {}
 
 	private items: Map<string, { item: IItem; quantity: number }> = new Map();
 
@@ -32,6 +32,6 @@ export class InventoryService implements IInventoryService {
 		this.items.delete(itemId);
 	}
 }
-export function initialInventoryService(): IInventoryService {
-	return new InventoryService();
+export function initialInventoryService(itemRepository: IItemRepository): IInventoryService {
+	return new InventoryService(itemRepository);
 }
