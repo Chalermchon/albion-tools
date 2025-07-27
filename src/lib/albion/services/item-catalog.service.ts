@@ -1,11 +1,10 @@
-import { initialItemCategoryRepository } from '../repositories/item-category.repository';
-import { initialItemRepository } from '../repositories/item.repository';
+import type { IItemCategoryRepository, IItemRepository } from '../types/repository.type';
 import type { IItemCatalogService, ItemsGroupedByCategoryAndType } from '../types/service.type';
 
 export class ItemCatalogService implements IItemCatalogService {
 	constructor(
-		private itemCategoryRepository = initialItemCategoryRepository(),
-		private itemRepository = initialItemRepository()
+		private itemCategoryRepository: IItemCategoryRepository,
+		private itemRepository: IItemRepository
 	) {}
 
 	getItemsByGroupingWithCategoryAndType(): ItemsGroupedByCategoryAndType {
@@ -24,6 +23,9 @@ export class ItemCatalogService implements IItemCatalogService {
 		}));
 	}
 }
-export function initialItemCatalogService(): IItemCatalogService {
-	return new ItemCatalogService();
+export function initialItemCatalogService(
+	itemCategoryRepository: IItemCategoryRepository,
+	itemRepository: IItemRepository
+): IItemCatalogService {
+	return new ItemCatalogService(itemCategoryRepository, itemRepository);
 }

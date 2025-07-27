@@ -1,11 +1,9 @@
 <script lang="ts">
 	import Item from 'components/atoms/item.svelte';
 	import Drawer from 'components/molecules/drawer.svelte';
-	import { initialItemCatalogService } from 'lib/albion/services/item-catalog.service';
 	import type { ItemWithQuantity } from 'lib/albion/types/service.type';
+	import { ItemCatalogService } from 'lib/services';
 	import { createEventDispatcher } from 'svelte';
-
-	const ItemCatalogService = initialItemCatalogService();
 
 	export let isOpen = false;
 	export let items: ItemWithQuantity[] = [];

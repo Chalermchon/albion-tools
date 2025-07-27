@@ -22,15 +22,9 @@ export type ItemsGroupedByCategoryAndType = Array<{
 		items: Item[];
 	}>;
 }>;
-export type ItemWithQuantity = {
-	id: string;
-	category: string;
-	type: string;
-	tier: number;
-	name: string;
-	imageUrl: string;
+export interface ItemWithQuantity extends Item {
 	quantity: number;
-};
+}
 export type Item = {
 	id: string;
 	category: string;
